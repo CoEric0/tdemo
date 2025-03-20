@@ -9,6 +9,7 @@
         |--services/    业务逻辑目录。                 业务逻辑/service+impl
 |
 |
+|--common/      抽象模型，通用常量等
 |--utils/       工具目录
 |--core/        核心目录，如配置、安全、register
 |--databse/     数据库基础设置
