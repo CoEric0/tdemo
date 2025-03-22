@@ -1,3 +1,4 @@
-from fastapi import FastAPI
+from backend.core.register import register_app
 
-app = FastAPI()
+
+app = register_app()

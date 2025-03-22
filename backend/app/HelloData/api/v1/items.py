@@ -1,4 +1,6 @@
 from fastapi import APIRouter
+from app.HelloData.schemas.items import OfferParam
+
 from database.db import CurrentSession as db
 
 
@@ -9,7 +11,7 @@ router = APIRouter()
 动态路由，?关键字参数在函数中定义
 '''
 @router.get("/items/{item_id}")
-def read_item(item_id: int, q: Union[str, None] = None):
+def read_item(item_id: int):
     cursor = db.cursor()
 
     sql = "select * from item_table where id = ?"
@@ -27,7 +29,7 @@ put方法，通过装饰器语句定义
 同一路由下可以有不同的方法
 '''
 @router.put("/items/{item_id}")
-async def create_item(item_id: int, item: Item):
+async def create_item(item_id: int, item: OfferParam):
     '''
     引入item
     '''
