@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 # from functools import lru_cache
+import os
 from typing import Any, Literal
 
 # from pydantic import model_validator
 # from pydantic_settings import BaseSettings, SettingsConfigDict
 
-# from backend.core.path_conf import BasePath
-from pathlib import Path
+from backend.core.path_conf import BasePath
 
 
 class Settings():
@@ -16,13 +16,13 @@ class Settings():
     DATABASE_TYPE='sqlite' # Literal['mysql', 'postgresql','sqlite']
 
     # database
-    DATABASE_PATH = Path(__file__).parent.parent.parent / "data" / "lite.db"    
-    if DATABASE_TYPE == 'sqlite':
-        DATABASE_URL = f'sqlite:///{DATABASE_PATH}'
-    else:
-        DATABASE_URL = f'{DATABASE_TYPE}://root:123456@localhost:3306/test'
+    DATABASE_PATH = os.path.join(BasePath,'data','lite.db')  # sqlite 数据库路径
     DATABASE_ECHO: bool = True
     DATABASE_POOL_ECHO: bool = False
+
+    # DateTime
+    DATETIME_TIMEZONE: str = 'Asia/Shanghai'
+    DATETIME_FORMAT: str = '%Y-%m-%d %H:%M:%S'
 
 # class Settings(BaseSettings):
 #     """Global Settings"""

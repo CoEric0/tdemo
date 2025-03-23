@@ -17,5 +17,5 @@ class ItemParam(ItemSchemaBase):
 class OfferParam(ItemParam):
     # 额外字段
 
-    # 可选的布尔值，默认为None
-    is_offer: Optional[bool] = None
+    # 可选的布尔值，默认为False
+    is_offer: bool = False

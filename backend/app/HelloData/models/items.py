@@ -1,7 +1,6 @@
-from backend.common.model import Base
 from sqlalchemy import String
-from sqlalchemy import Mapped, mapped_column
-from backend.common.model import id_key
+from sqlalchemy.orm import Mapped, mapped_column
+from backend.common.model import Base, id_key
 
 
 # Base： 对象基类 from sqlalchemy.orm import declarative_base

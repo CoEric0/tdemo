@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from backend.core.config import settings
+from backend.core.conf import settings
 
 # app注册器
 def register_app():

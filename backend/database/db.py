@@ -1,24 +1,36 @@
 '''
 数据库引入
 '''
+import sys
+from typing import Annotated
+from uuid import uuid4
 
-from backend.core.config import settings
+from fastapi import Depends
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
+
 from sqlalchemy import URL
-from sqlalchemy.ext.asyncio import create_async_engine, async_sessionmaker, AsyncEngine, AsyncSession
+from sqlalchemy.ext.asyncio import AsyncEngine, AsyncSession, async_sessionmaker, create_async_engine
+
+from backend.core.conf import settings
+from backend.common.log import log
+from backend.common.model import MappedBase
+
+
 
 def create_db_link():
     '''
     创建数据库连接
     '''
-    url = settings.DATABASE_URL
+    url = URL.create(
+        drivername="sqlite+aiosqlite",
+        database=settings.DATABASE_PATH       
+    )
     
-
     return url
 
 
-def create_db_session(url: str = None):
+def create_db_session(url: str = "") -> sessionmaker:
     '''
     创建数据库会话
     '''

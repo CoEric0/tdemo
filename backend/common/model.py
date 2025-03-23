@@ -17,12 +17,12 @@ id_key = Annotated[
 ]
 
 
-# Mixin: 一种面向对象编程概念, 使结构变得更加清晰, `Wiki <https://en.wikipedia.org/wiki/Mixin/>`__
-class UserMixin(MappedAsDataclass):
-    """用户 Mixin 数据类"""
+# # Mixin: 一种面向对象编程概念, 使结构变得更加清晰, `Wiki <https://en.wikipedia.org/wiki/Mixin/>`__
+# class UserMixin(MappedAsDataclass):
+#     """用户 Mixin 数据类"""
 
-    created_by: Mapped[int] = mapped_column(sort_order=998, comment='创建者')
-    updated_by: Mapped[int | None] = mapped_column(init=False, default=None, sort_order=998, comment='修改者')
+#     created_by: Mapped[int] = mapped_column(sort_order=998, comment='创建者')
+#     updated_by: Mapped[int | None] = mapped_column(init=False, default=None, sort_order=998, comment='修改者')
 
 
 class DateTimeMixin(MappedAsDataclass):
@@ -60,17 +60,17 @@ class DataClassBase(MappedAsDataclass, MappedBase):
     __abstract__ = True
 
 
-# class Base(DataClassBase, DateTimeMixin):
-#     """
-#     声明性 Mixin 数据类基类, 带有数据类集成, 并包含 MiXin 数据类基础表结构, 你可以简单的理解它为含有基础表结构的数据类基类
-#     """  # noqa: E501
-
-#     __abstract__ = True
-
-from sqlalchemy.orm import declarative_base
-class Base(declarative_base()):
+class Base(DataClassBase, DateTimeMixin):
     """
     声明性 Mixin 数据类基类, 带有数据类集成, 并包含 MiXin 数据类基础表结构, 你可以简单的理解它为含有基础表结构的数据类基类
     """  # noqa: E501
 
     __abstract__ = True
+
+# from sqlalchemy.orm import declarative_base
+# class Base(declarative_base()):
+#     """
+#     声明性 Mixin 数据类基类, 带有数据类集成, 并包含 MiXin 数据类基础表结构, 你可以简单的理解它为含有基础表结构的数据类基类
+#     """  # noqa: E501
+
+#     __abstract__ = True
