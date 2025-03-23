@@ -1,9 +1,11 @@
 from fastapi import APIRouter
 
-# from app.HelloData.schemas.items import OfferParam
+from app.HelloData.schemas.items import OfferParam
 from app.HelloData.services.items_service import item_service
 
-from database.db import DB_engine as db
+from backend.common.response.response_schema import ResponseModel, ResponseSchemaModel, response_base
+
+# from database.db import DB_engine as db
 
 
 router = APIRouter()
@@ -25,10 +27,10 @@ router = APIRouter()
 
 #     return {"item_id": item_id, "item": item}
 
-@router.get("/items/{item_id}")
+@router.get("/items/{item_id}",summary="获取商品")
 async def read_item(item_id: int):
-    item = item_service.get(item_id)
-    return {"item_id": item_id, "item": item}
+    item = await item_service.get(item_id)
+    return response_base.success(data=item)
 
 # '''
 # put方法，通过装饰器语句定义
@@ -53,5 +55,4 @@ async def read_item(item_id: int):
 
 @router.put("/items/{item_id}")
 async def create_item(item_id: int, item: OfferParam):
-    item = item_service.create(item)
-    return {"item_name": item.name, "item_id": item_id}
+    pass

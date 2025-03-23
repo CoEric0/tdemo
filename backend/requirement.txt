@@ -5,4 +5,5 @@ python-multipart
 asgi_correlation_id 
 loguru
 aiosqlite
-sqlalchemy_crud_plus
+- sqlalchemy_crud_plus
+msgspec

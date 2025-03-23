@@ -82,7 +82,7 @@ async_engine, async_db_session = create_async_engine_and_session(SQLALCHEMY_DATA
 CurrentSession = Annotated[AsyncSession, Depends(get_db)]
 
 # 传统数据库引擎
-DB_engine = create_db_session(SQLALCHEMY_DATABASE_URL)
+# DB_engine = create_db_session(SQLALCHEMY_DATABASE_URL)
 
 
 

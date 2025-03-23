@@ -2,7 +2,7 @@
 from app.HelloData.models.items import Item
 from app.HelloData.schemas.items import ItemParam,OfferParam
 
-from database.db import create_db_session, DB_engine, SQLALCHEMY_DATABASE_URL
+from database.db import create_db_session, SQLALCHEMY_DATABASE_URL
 
 class ItemCRUD( ):
     async def get_item_by_id(self, db, item_id: int) -> Item | None:
