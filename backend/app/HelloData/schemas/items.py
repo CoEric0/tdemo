@@ -1,6 +1,7 @@
-from backend.common.schema import SchemaBase
-from typing import Optional
+from pydantic import ConfigDict
+from datetime import datetime
 
+from backend.common.schema import SchemaBase
 '''
 继承BaseModel,帮助fastapi识别为body
 '''
@@ -8,14 +9,21 @@ from typing import Optional
 
 class ItemSchemaBase(SchemaBase):
     name: str
-    
-
-class ItemParam(ItemSchemaBase):
     price: float
-    
-    
-class OfferParam(ItemParam):
-    # 额外字段
+    is_offer: bool  = False
 
-    # 可选的布尔值，默认为False
-    is_offer: bool = False
+class CreateItemParam(ItemSchemaBase):
+    pass
+
+class UpdateItemParam(ItemSchemaBase):
+    pass
+    
+class GetItemDetail(ItemSchemaBase):
+    # 父类继承，允许从SQLAlchemy对象属性创建模型实例
+    model_config = ConfigDict(from_attributes=True)
+
+    id: int
+    is_offer: bool
+    created_time: datetime
+    updated_time: datetime | None = None
+    

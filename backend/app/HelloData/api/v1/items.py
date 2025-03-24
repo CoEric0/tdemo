@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 
-from app.HelloData.schemas.items import OfferParam
+from app.HelloData.schemas.items import GetItemDetail, CreateItemParam
 from app.HelloData.services.items_service import item_service
 
 from backend.common.response.response_schema import ResponseModel, ResponseSchemaModel, response_base
@@ -28,7 +28,7 @@ router = APIRouter()
 #     return {"item_id": item_id, "item": item}
 
 @router.get("/items/{item_id}",summary="获取商品")
-async def read_item(item_id: int):
+async def read_item(item_id: int) -> ResponseSchemaModel[GetItemDetail]:
     item = await item_service.get(item_id)
     return response_base.success(data=item)
 
@@ -54,7 +54,7 @@ async def read_item(item_id: int):
 #     return {"item_name": item.name, "item_id": item_id}
 
 @router.put("/items/create",summary="创建商品")
-async def create_item(aitem: OfferParam):
+async def create_item(aitem: CreateItemParam) -> ResponseModel:
     await item_service.create(aitem)
 
     return response_base.success()
