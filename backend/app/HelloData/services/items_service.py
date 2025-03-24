@@ -15,10 +15,11 @@ class ItemService:
         return item
 
     @staticmethod
-    async def create(aitem: OfferParam) -> Item:
+    async def create(aitem: OfferParam) -> None:
         async with async_db_session() as db:
-            item = await item_dao.create_item(db, aitem)
-        return item
+            # 重复检查等其他逻辑可以放在此处
+            # name = await item_dao.get_by_title(db, aitem.name) ...
+            await item_dao.create_item(db, aitem)
 
 
 item_service: ItemService = ItemService()

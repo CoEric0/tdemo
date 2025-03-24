@@ -53,6 +53,8 @@ async def read_item(item_id: int):
 
 #     return {"item_name": item.name, "item_id": item_id}
 
-@router.put("/items/{item_id}")
-async def create_item(item_id: int, item: OfferParam):
-    pass
+@router.put("/items/create",summary="创建商品")
+async def create_item(aitem: OfferParam):
+    await item_service.create(aitem)
+
+    return response_base.success()

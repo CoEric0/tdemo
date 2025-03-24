@@ -1,7 +1,7 @@
 
 from app.HelloData.models.items import Item
 from app.HelloData.schemas.items import ItemParam,OfferParam
-from sqlalchemy import select
+from sqlalchemy import select, insert
 
 # from database.db import create_db_session, SQLALCHEMY_DATABASE_URL
 
@@ -32,16 +32,26 @@ class ItemCRUD( ):
 
         return item
     
-    async def create_item(self, session, item: OfferParam) -> Item:
+    async def create_item(self, session, item: OfferParam) -> None:
+        '''
+        创建商品
+        实现数据库增加操作有较大不同
+        '''
         # sql = "insert into item_table(id, name, price, is_offer) values(?, ?, ?, ?)"
         # value = (item.id, item.name, item.price, item.is_offer)
 
-        # new_item = Item(name = item.name, price = item.price, is_offer = item.is_offer)
-        stmt = insert(Item).values(name = item.name, price = item.price, is_offer = item.is_offer)
-        await session.execute(stmt)
+        new_item = Item(name = item.name, price = item.price, is_offer = item.is_offer)
+        # INSERT INTO item_table (name, price, is_offer) VALUES (:name, :price, :is_offer)
+
+        session.add(new_item)
         await session.commit()
 
-        return new_item
+        # 最佳实践
+        # if flush:
+        #     await session.flush()
+        # if commit:
+        #     await session.commit()
+
 
     
 # 变量名 :类型 = 实例创建
