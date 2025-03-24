@@ -48,6 +48,9 @@ class Settings():
     MIDDLEWARE_CORS: bool = True
     MIDDLEWARE_ACCESS: bool = True
 
+    # Trace ID
+    TRACE_ID_REQUEST_HEADER_KEY: str = 'X-Request-ID'
+
 # class Settings(BaseSettings):
 #     """Global Settings"""
 
@@ -95,8 +98,6 @@ class Settings():
 #     UPLOAD_VIDEO_SIZE_MAX: int = 1024 * 1024 * 20
 
 #     # Database
-#     DATABASE_ECHO: bool = False
-#     DATABASE_POOL_ECHO: bool = False
 #     DATABASE_SCHEMA: str = 'fba'
 #     DATABASE_CHARSET: str = 'utf8mb4'
 
@@ -133,29 +134,7 @@ class Settings():
 #     COOKIE_REFRESH_TOKEN_KEY: str = 'fba_refresh_token'
 #     COOKIE_REFRESH_TOKEN_EXPIRE_SECONDS: int = TOKEN_REFRESH_EXPIRE_SECONDS
 
-#     # Log
-#     LOG_CID_DEFAULT_VALUE: str = '-'
-#     LOG_CID_UUID_LENGTH: int = 32  # must <= 32
-#     LOG_STD_LEVEL: str = 'INFO'
-#     LOG_ACCESS_FILE_LEVEL: str = 'INFO'
-#     LOG_ERROR_FILE_LEVEL: str = 'ERROR'
-#     LOG_STD_FORMAT: str = (
-#         '<green>{time:YYYY-MM-DD HH:mm:ss.SSS}</> | <lvl>{level: <8}</> | '
-#         '<cyan> {correlation_id} </> | <lvl>{message}</>'
-#     )
-#     LOG_FILE_FORMAT: str = (
-#         '<green>{time:YYYY-MM-DD HH:mm:ss.SSS}</> | <lvl>{level: <8}</> | '
-#         '<cyan> {correlation_id} </> | <lvl>{message}</>'
-#     )
-#     LOG_ACCESS_FILENAME: str = 'fba_access.log'
-#     LOG_ERROR_FILENAME: str = 'fba_error.log'
 
-#     # Middleware
-#     MIDDLEWARE_CORS: bool = True
-#     MIDDLEWARE_ACCESS: bool = True
-
-#     # Trace ID
-#     TRACE_ID_REQUEST_HEADER_KEY: str = 'X-Request-ID'
 
 #     # CORS
 #     CORS_ALLOWED_ORIGINS: list[str] = [
