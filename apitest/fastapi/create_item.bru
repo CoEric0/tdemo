@@ -1,0 +1,19 @@
+meta {
+  name: create_item
+  type: http
+  seq: 4
+}
+
+put {
+  url: {{IP}}:{{api_port}}/items/create
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "name": "auto_test",
+    "price": 56,
+    "is_offer": false
+  }
+}
