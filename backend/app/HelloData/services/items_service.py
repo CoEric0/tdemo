@@ -1,6 +1,8 @@
 from app.HelloData.cruds.items_crud import item_dao
 from app.HelloData.models.items import Item
-from app.HelloData.schemas.items import ItemParam,OfferParam
+from app.HelloData.schemas.items import OfferParam
+from backend.common.exception import errors
+
 from database.db import async_db_session
 
 class ItemService:
@@ -9,7 +11,7 @@ class ItemService:
         async with async_db_session() as db:
             item = await item_dao.get_item_by_id(db, aitem_id)
             if not item:
-                raise Exception("Item not found")
+                raise errors.NotFoundError(msg="商品不存在")
         return item
 
     @staticmethod

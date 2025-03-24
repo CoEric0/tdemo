@@ -12,6 +12,9 @@ from backend.core.path_conf import BasePath
 class Settings():
     PROJECT_NAME = 'FastAPI Hello World'
 
+    # 开发环境
+    ENVIRONMENT: Literal['dev', 'pro'] = 'dev'
+
     # env database type
     DATABASE_TYPE='sqlite' # Literal['mysql', 'postgresql','sqlite']
 
@@ -40,6 +43,10 @@ class Settings():
     )
     LOG_ACCESS_FILENAME: str = 'fba_access.log'
     LOG_ERROR_FILENAME: str = 'fba_error.log'
+
+    # Middleware
+    MIDDLEWARE_CORS: bool = True
+    MIDDLEWARE_ACCESS: bool = True
 
 # class Settings(BaseSettings):
 #     """Global Settings"""
