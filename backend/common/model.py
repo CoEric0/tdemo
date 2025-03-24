@@ -40,6 +40,8 @@ class MappedBase(AsyncAttrs, DeclarativeBase):
     """
     生命式基类, 作为所有基类或数据模型类的父类而存在
 
+    会收集所有子类的 __tablename__，并生成对应的表
+
     `AsyncAttrs <https://docs.sqlalchemy.org/en/20/orm/extensions/asyncio.html#sqlalchemy.ext.asyncio.AsyncAttrs>`__
     `DeclarativeBase <https://docs.sqlalchemy.org/en/20/orm/declarative_config.html>`__
     `mapped_column() <https://docs.sqlalchemy.org/en/20/orm/mapping_api.html#sqlalchemy.orm.mapped_column>`__
