@@ -1,0 +1,15 @@
+meta {
+  name: expensive_id_check
+  type: http
+  seq: 6
+}
+
+get {
+  url: {{IP}}:{{api_port}}/bb?aitem_id=1
+  body: none
+  auth: inherit
+}
+
+params:query {
+  aitem_id: 1
+}
