@@ -1,0 +1,23 @@
+meta {
+  name: update_item
+  type: http
+  seq: 5
+}
+
+put {
+  url: {{IP}}:{{api_port}}/items/update/{{id}}
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "name": "auto_test",
+    "price": 362,
+    "is_offer": false
+  }
+}
+
+vars:pre-request {
+  id: 10
+}

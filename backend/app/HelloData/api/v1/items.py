@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 
-from app.HelloData.schemas.items import GetItemDetail, CreateItemParam
+from app.HelloData.schemas.items import GetItemDetail, CreateItemParam, UpdateItemParam
 from app.HelloData.services.items_service import item_service
 
 from backend.common.response.response_schema import ResponseModel, ResponseSchemaModel, response_base
@@ -14,47 +14,27 @@ router = APIRouter()
 # '''
 # 动态路由，?关键字参数在函数中定义
 # '''
-# @router.get("/items/{item_id}")
-# def read_item(item_id: int):
-#     cursor = db.cursor()
-
-#     sql = "select * from item_table where id = ?"
-
-#     value = (item_id,)
-#     cursor.execute(sql, value)
-    
-#     item = cursor.fetchone() # 获取一条数据
-
-#     return {"item_id": item_id, "item": item}
-
 @router.get("/items/{item_id}",summary="获取商品")
 async def read_item(item_id: int) -> ResponseSchemaModel[GetItemDetail]:
+    # 数据的传输在此处控制，dao 返回的 model 对象不影响在api接口返回 schema 对象
     item = await item_service.get(item_id)
     return response_base.success(data=item)
 
 # '''
 # put方法，通过装饰器语句定义
 # 引入Body
-# 同一路由下可以有不同的方法
 # '''
-# @router.put("/items/{item_id}")
-# async def create_item(item_id: int, item: OfferParam):
-#     '''
-#     引入item
-#     '''
-#     cursor = db.cursor()
-
-#     sql = "insert into item_table(id, name, price, is_offer) values(?, ?, ?, ?)"
-
-#     value = (item_id, item.name, item.price, item.is_offer)
-#     cursor.execute(sql, value)
-
-#     db.commit() # 提交到数据库，而不是停留在内存中
-
-#     return {"item_name": item.name, "item_id": item_id}
-
 @router.put("/items/create",summary="创建商品")
 async def create_item(aitem: CreateItemParam) -> ResponseModel:
     await item_service.create(aitem)
 
     return response_base.success()
+
+@router.put("/items/update/{aitem_id}",summary="更新商品")
+async def update_item(aitem_id: int, aitem: UpdateItemParam) -> ResponseModel:
+    cnt = await item_service.update(aitem_id, aitem)
+
+    if cnt > 0:
+        return response_base.success(data=cnt)
+    else:
+        return response_base.fail()
