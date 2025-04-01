@@ -17,7 +17,8 @@ class CreateItemParam(ItemSchemaBase):
 
 class UpdateItemParam(ItemSchemaBase):
     pass
-    
+
+# 响应模式
 class GetItemDetail(ItemSchemaBase):
     # 父类继承，允许从SQLAlchemy对象属性创建模型实例
     model_config = ConfigDict(from_attributes=True)
